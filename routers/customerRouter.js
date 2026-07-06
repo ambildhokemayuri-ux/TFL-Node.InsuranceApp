@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const controller = require("../controllers/policyController");
+const controller = require("../controllers/customerController");
 
 
 
-router.get('/getAllPolicies',controller.getAllPolicies);
-//router.put('/updatecustomer/:id',controller.updateCustomer);
+//router.get('/getAllCustomers',controller.getAllCustomers);
+router.post('/addCustomer',controller.addCustomer);
 //router.post('/purchasePolicy',controller.purchasePolicy);
 //router.delete('/delete/:id',controller.deleteCustomer);
 

@@ -7,7 +7,7 @@ var bodyparser =require('body-parser');
 
 //routers
 var policyRouter = require('./routers/policyRouter') 
-
+var customerRouter = require('./routers/customerRouter')
 
 var app = express();
 
@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public'))) ;
 
 
 app.use('/api/policies',policyRouter);
-
+app.use('/api/customers',customerRouter);
 
 /*app.get("/api/policies", (req, res) => {
 
