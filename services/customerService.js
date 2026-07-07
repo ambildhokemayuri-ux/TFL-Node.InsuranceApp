@@ -1,4 +1,90 @@
-var customerRepo=require("../reposetory/customerRepo");
+
+
+const customerRepo = require("../repositories/customerRepository");
+
+// Get All
+exports.getAllCustomers = (result) => {
+    customerRepo.getAllCustomers(result);
+};
+
+// Get By Id
+exports.getCustomerById = (id, result) => {
+    customerRepo.getCustomerById(id, result);
+};
+
+// Add
+exports.addCustomer = (
+    CustomerCode,
+    FirstName,
+    LastName,
+    DateOfBirth,
+    Gender,
+    Email,
+    MobileNumber,
+    Address,
+    result
+) => {
+
+    customerRepo.addCustomer(
+        CustomerCode,
+        FirstName,
+        LastName,
+        DateOfBirth,
+        Gender,
+        Email,
+        MobileNumber,
+        Address,
+        result
+    );
+
+};
+
+// Update
+exports.updateCustomer = (
+    id,
+    FirstName,
+    LastName,
+    Email,
+    MobileNumber,
+    Address,
+    result
+) => {
+
+    customerRepo.updateCustomer(
+        id,
+        FirstName,
+        LastName,
+        Email,
+        MobileNumber,
+        Address,
+        result
+    );
+
+};
+
+// Delete
+exports.deleteCustomer = (id, result) => {
+    customerRepo.deleteCustomer(id, result);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*var customerRepo=require("../reposetory/customerRepo");
 
 
 
@@ -16,3 +102,4 @@ exports.addCustomer=(CustomerCode,FirstName,LastName,DateOfBirth,Gender,Email,
         TotalPoliciesPurchased,result);
     // console.log("hello2");
 }
+*/

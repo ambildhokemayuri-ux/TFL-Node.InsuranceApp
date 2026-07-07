@@ -5,9 +5,13 @@ const controller = require("../controllers/policyController");
 
 
 router.get('/getAllPolicies',controller.getAllPolicies);
-//router.put('/updatecustomer/:id',controller.updateCustomer);
-//router.post('/purchasePolicy',controller.purchasePolicy);
-//router.delete('/delete/:id',controller.deleteCustomer);
 
+router.get("/:id", controller.getPolicyById);
 
-module.exports=router;
+router.post("/", controller.addPolicy);
+
+router.put("/:id", controller.updatePolicy);
+
+router.delete("/:id", controller.deletePolicy);
+
+module.exports = router;

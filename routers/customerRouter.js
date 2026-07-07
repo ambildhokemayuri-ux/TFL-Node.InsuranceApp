@@ -4,10 +4,15 @@ const controller = require("../controllers/customerController");
 
 
 
-//router.get('/getAllCustomers',controller.getAllCustomers);
+router.get("/getAllCustomers", controller.getAllCustomers);
+
 router.post('/addCustomer',controller.addCustomer);
-//router.post('/purchasePolicy',controller.purchasePolicy);
-//router.delete('/delete/:id',controller.deleteCustomer);
+
+router.get("/:id", controller.getCustomerById);
 
 
-module.exports=router;
+router.put("/:id", controller.updateCustomer);
+
+router.delete("/:id", controller.deleteCustomer);
+
+module.exports = router;

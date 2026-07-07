@@ -6,3 +6,84 @@ exports.getAllPolicies=(result)=>{
     // console.log("hello 3");
 };
 
+
+// Get Policy By Id
+exports.getPolicyById = (id, result) => {
+    connection.query(
+        "SELECT * FROM policies WHERE PolicyId=?",
+        [id],
+        result
+    );
+};
+
+// Add Policy
+exports.addPolicy = (
+                        PolicyNumber,
+                        CustomerId,
+                        PolicyType,
+                        PolicyAmount,
+                        IsRenewed,
+                        result
+                    ) => {
+
+                        const sql = `
+                            INSERT INTO policies
+                            (PolicyNumber,CustomerId,PolicyType,PolicyAmount,IsRenewed)
+                            VALUES (?,?,?,?,?)
+                        `;
+
+                        connection.query(sql,
+                            [
+                                PolicyNumber,
+                                CustomerId,
+                                PolicyType,
+                                PolicyAmount,
+                                IsRenewed
+                            ],
+                            result
+                        );
+                    };
+
+
+                    // Update Policy
+
+exports.updatePolicy = (
+                        id,
+                        PolicyType,
+                        PolicyAmount,
+                        IsRenewed,
+                        result
+                    ) => {
+
+                        const sql = `
+                        UPDATE policies
+                        SET PolicyType=?,
+                            PolicyAmount=?,
+                            IsRenewed=?
+                        WHERE PolicyId=?
+                        `;
+
+                        connection.query(sql,
+                            [
+                                PolicyType,
+                                PolicyAmount,
+                                IsRenewed,
+                                id
+                            ],
+                            result
+                        );
+
+                    };
+
+
+                    // Delete Policy
+
+exports.deletePolicy = (id, result) => {
+
+                connection.query(
+                            "DELETE FROM policies WHERE PolicyId=?",
+                            [id],
+                            result
+                        );
+
+                    };
