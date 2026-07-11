@@ -1,4 +1,6 @@
 const premiumRepo = require("../reposetory/premiumRepo");
+const policyRepo = require("../reposetory/policyReposetory");
+const customerRepo = require("../reposetory/customerRepository");
 
 exports.getAllPremiums = (result) => {
     premiumRepo.getAllPremiums(result);
@@ -25,26 +27,86 @@ exports.addPremium = (
             message: "Premium Amount should be greater than zero."
         });
     }
-    if (!isactivePolicy(PolicyId)) {
-        return result({
-            message: "Policy is not active. Cannot add premium."
-        });
-    }
 
-
+  
     
-    premiumRepo.addPremium(
-        PolicyId,
-        CustomerId,
-        AmountPaid,
-        PaymentDate,
-        PaymentMode,
-        TransactionId,
-        PaymentFrequency,
-        PaymentStatus,
-        Remarks,
-        result
-    );
+        customerRepo.getCustomerById(CustomerId, (customererr, customerdata) => {
+    
+            if (customererr)
+                return result(customererr);
+    
+         const customer = Array.isArray(customerdata) ? customerdata[0] : customerdata;
+
+        if (!customer) {
+            return result({
+                message: "Customer not found. Cannot add premium."
+            });
+
+        }
+
+        const customerStatus = customer.IsActive ?? customer.IsRenewed;
+        const normalizedStatus = typeof customerStatus === "string"
+        ? customerStatus.trim().toLowerCase()
+        : customerStatus;
+
+        const isActive = normalizedStatus === "active"
+        || normalizedStatus === "1"
+        || normalizedStatus === 1
+        || normalizedStatus === true
+        || normalizedStatus === "true";
+
+            if (!isActive) {
+                return result({
+                    message: "Customer is not active. Cannot add premium."
+                });
+            }
+        });
+    
+      ,
+    
+
+    policyRepo.getPolicyById(PolicyId, (policyErr, policyData) => {
+        if (policyErr) {
+            return result(policyErr);
+        }
+
+        const policy = Array.isArray(policyData) ? policyData[0] : policyData;
+
+        if (!policy) {
+            return result({
+                message: "Policy not found. Cannot add premium."
+            });
+        }
+
+        const policyStatus = policy.PolicyStatus ?? policy.IsActive ?? policy.IsRenewed;
+        const normalizedStatus = typeof policyStatus === "string"
+            ? policyStatus.trim().toLowerCase()
+            : policyStatus;
+        const isActive = normalizedStatus === "active"
+            || normalizedStatus === "1"
+            || normalizedStatus === 1
+            || normalizedStatus === true
+            || normalizedStatus === "true";
+
+        if (!isActive) {
+            return result({
+                message: "Policy is not active. Cannot add premium."
+            });
+        }
+
+        premiumRepo.addPremium(
+            PolicyId,
+            CustomerId,
+            AmountPaid,
+            PaymentDate,
+            PaymentMode,
+            TransactionId,
+            PaymentFrequency,
+            PaymentStatus,
+            Remarks,
+            result
+        );
+    });
 
 };
 

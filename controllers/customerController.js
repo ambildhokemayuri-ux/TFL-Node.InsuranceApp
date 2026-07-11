@@ -109,9 +109,9 @@ exports.addCustomer = (req, res) => {
                 
                 };
                 
-                emitter.on("customerAdded", handlers.Emailsend);
-                emitter.on("customerAdded", handlers.SMSsend);
-                emitter.on("customerAdded", handlers.CustomerAddedDocument);
+emitter.on("customerAdded", handlers.Emailsend);
+emitter.on("customerAdded", handlers.SMSsend);
+//emitter.on("customerAdded", handlers.CustomerAddedDocument);
 
 
 
@@ -137,22 +137,22 @@ exports.updateCustomer = (req, res) => {
                 message: "Customer Updated Successfully"
             });
 
-                            if (data) {
-                                        emitter.emit("customerUpdated", {
-                                        policyId: req.body.PolicyId,
-                                        data
-                                    });
-                                    console.log('Customer Updated Event Emitted');
-                                }
+            if (data) {
+                         emitter.emit("customerUpdated", {
+                        policyId: req.body.PolicyId,
+                         data
+                     });
+                    console.log('Customer Updated Event Emitted');
+                    }
                     
                     
-                            });
+                    });
                     
                     };
                     
-                    emitter.on("customerUpdated", handlers.Emailsend);
-                    emitter.on("customerUpdated", handlers.SMSsend);
-                    //emitter.on("customerUpdated", handlers.CustomerUpdatedDocument);
+        emitter.on("customerUpdated", handlers.Emailsend);
+        emitter.on("customerUpdated", handlers.SMSsend);
+        //emitter.on("customerUpdated", handlers.CustomerUpdatedDocument);
 
 // Delete Customer
 exports.deleteCustomer = (req, res) => {
@@ -168,8 +168,21 @@ exports.deleteCustomer = (req, res) => {
 
             res.json({
                 message: "Customer Deleted Successfully"
-            });
+           
+           });
 
-        });
-
-};
+        if (data) {
+                         emitter.emit("customerUpdated", {
+                        policyId: req.body.PolicyId,
+                         data
+                     });
+                    console.log('Customer Updated Event Emitted');
+                    }
+                    
+                    
+                    });
+                    
+                    };
+                    
+        emitter.on("customerUpdated", handlers.Emailsend);
+        emitter.on("customerUpdated", handlers.SMSsend);

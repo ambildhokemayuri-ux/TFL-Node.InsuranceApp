@@ -1,6 +1,6 @@
 
 
-const customerRepo = require("../repositories/customerRepository");
+const customerRepo = require("../reposetory/customerRepository");
 
 // Get All
 exports.getAllCustomers = (result) => {
