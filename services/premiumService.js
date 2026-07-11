@@ -29,8 +29,7 @@ exports.addPremium = (
     }
 
   
-    
-        customerRepo.getCustomerById(CustomerId, (customererr, customerdata) => {
+    customerRepo.getCustomerById(CustomerId, (customererr, customerdata) => {
     
             if (customererr)
                 return result(customererr);
@@ -43,29 +42,18 @@ exports.addPremium = (
             });
 
         }
-
-        const customerStatus = customer.IsActive ?? customer.IsRenewed;
-        const normalizedStatus = typeof customerStatus === "string"
-        ? customerStatus.trim().toLowerCase()
-        : customerStatus;
-
-        const isActive = normalizedStatus === "active"
-        || normalizedStatus === "1"
-        || normalizedStatus === 1
-        || normalizedStatus === true
-        || normalizedStatus === "true";
-
-            if (!isActive) {
+      
+            if (customer.IsActive != 1) {
                 return result({
-                    message: "Customer is not active. Cannot add premium."
+                    message: "Customer is not active.Cannot add premium."
                 });
             }
+
         });
     
-      ,
-    
-
+      
     policyRepo.getPolicyById(PolicyId, (policyErr, policyData) => {
+        
         if (policyErr) {
             return result(policyErr);
         }
@@ -78,17 +66,7 @@ exports.addPremium = (
             });
         }
 
-        const policyStatus = policy.PolicyStatus ?? policy.IsActive ?? policy.IsRenewed;
-        const normalizedStatus = typeof policyStatus === "string"
-            ? policyStatus.trim().toLowerCase()
-            : policyStatus;
-        const isActive = normalizedStatus === "active"
-            || normalizedStatus === "1"
-            || normalizedStatus === 1
-            || normalizedStatus === true
-            || normalizedStatus === "true";
-
-        if (!isActive) {
+        if (policy.IsRenewed != 1) {
             return result({
                 message: "Policy is not active. Cannot add premium."
             });

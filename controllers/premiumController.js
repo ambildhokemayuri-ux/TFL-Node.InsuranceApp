@@ -21,7 +21,8 @@ exports.getAllPremiums = (req, res) => {
 
 exports.getPremiumById = (req, res) => {
 
-    premiumService.getPremiumById(req.params.id,
+    premiumService.getPremiumById(
+        req.params.id,
         (err, data) => {
 
             if (err)

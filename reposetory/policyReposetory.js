@@ -16,6 +16,22 @@ exports.getPolicyById = (id, result) => {
     );
 };
 
+exports.getPolicyByNumber = (PolicyNumber, result) => {
+
+    const sql = `
+        SELECT *
+        FROM policies
+        WHERE PolicyNumber = ?
+    `;
+
+    connection.query(
+        sql,
+        [PolicyNumber],
+        result
+    );
+
+};
+
 // Add Policy
 exports.addPolicy = (
                         PolicyNumber,
