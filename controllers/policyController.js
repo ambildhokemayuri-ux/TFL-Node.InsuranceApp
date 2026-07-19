@@ -45,6 +45,28 @@ exports.getPolicyById = (req, res) => {
 
 };
 
+exports.getPolicyByCustomerId = (req, res) => {
+
+    policyService.getPolicyByCustomerId(
+        req.params.id,
+        (err, data) => {
+
+            if (err)
+                return res.send(err);
+
+            if (data) {
+                emitter.emit("policyFetchedById", {
+                    policyId: req.params.id,
+                    data
+                });
+            }
+
+            res.send(data);
+
+        });
+
+};
+
 emitter.on("policyFetchedById", handlers.Emailsend);
 emitter.on("policyFetchedById", handlers.SMSsend);
 
@@ -145,6 +167,9 @@ exports.deletePolicy = (req, res) => {
             res.send({
                 message: "Policy Deleted Successfully"
             });
+           /* res.json({
+                policyNumber: req.body.policyNumber,
+            });*/
 
         if (data) {
                 emitter.emit("policyDeleted", {
@@ -159,3 +184,27 @@ exports.deletePolicy = (req, res) => {
 };
 emitter.on("policyDeleted", handlers.Emailsend);
 emitter.on("policyDeleted", handlers.SMSsend);
+
+
+
+exports.renewPolicy = (req, res) => {
+
+    policyService.renewPolicy(
+
+        req.params.PolicyNumber,
+
+        (err, data) => {
+
+            if (err) {
+                return res.status(500).json(err);
+            }
+
+            res.json({
+                message: "Policy Renewed Successfully"
+            });
+
+        }
+
+    );
+
+};

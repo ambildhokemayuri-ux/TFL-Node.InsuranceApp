@@ -1,5 +1,6 @@
 const claimRepo = require("../reposetory/claimRepo");
 const policyRepo = require("../reposetory/policyReposetory");
+const customerRepo = require("../reposetory/customerRepository");
 
 exports.getAllClaims = (result) => {
     claimRepo.getAllClaims(result);
@@ -25,7 +26,7 @@ exports.addClaim = (
 
                     ) => {
 
-    // Check Policy Exists
+    // Check Policy Number Exists
 
     policyRepo.getPolicyByNumber(PolicyNumber, (err, policyData) => {
 
@@ -39,10 +40,41 @@ exports.addClaim = (
         if (!policy) {
 
             return result({
-                message: "Policy Not Found"
+                message: "Policy number " + PolicyNumber + " Not Found"
             });
 
         }
+
+        if (policy.IsRenewed != 1) {
+            return result({
+                message: "Policy is not Renewed. Cannot add claim."
+            });
+        }
+
+        customerRepo.getCustomerById(CustomerId, (customererr, customerdata) => {
+            
+                    if (customererr)
+                        return result(customererr);
+            
+                 const customer = Array.isArray(customerdata) ? customerdata[0] : customerdata;
+        
+                if (!customer) {
+                    return result({
+                        message: "Customer not found. Cannot add premium."
+                    });
+        
+                }
+              
+                    if (customer.IsActive != 1) {
+                        return result({
+                            message: "Customer is not active.Cannot add premium."
+                        });
+                    }
+        
+                });
+            
+
+
 
         claimRepo.addClaim(
 

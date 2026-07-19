@@ -21,7 +21,19 @@ exports.addCustomer = (
     Gender,
     Email,
     MobileNumber,
-    Address,
+    AddressLine1,
+    AddressLine2,
+    City,
+    State,
+    PostalCode,
+    Country,
+    PanNumber,
+    AadhaarNumber,
+    Occupation,
+    AnnualIncome,
+    NomineeName,
+    NomineeRelationship,
+    NomineeContactNumber,
     result
 ) => {
 
@@ -33,7 +45,19 @@ exports.addCustomer = (
         Gender,
         Email,
         MobileNumber,
-        Address,
+        AddressLine1,
+        AddressLine2,
+        City,
+        State,
+        PostalCode,
+        Country,
+        PanNumber,
+        AadhaarNumber,
+        Occupation,
+        AnnualIncome,
+        NomineeName,
+        NomineeRelationship,
+        NomineeContactNumber,
         result
     );
 
@@ -46,7 +70,12 @@ exports.updateCustomer = (
     LastName,
     Email,
     MobileNumber,
-    Address,
+    AddressLine1,
+    AddressLine2,
+    City,
+    State,
+    PostalCode,
+    Country,
     result
 ) => {
 
@@ -56,7 +85,12 @@ exports.updateCustomer = (
         LastName,
         Email,
         MobileNumber,
-        Address,
+        AddressLine1,
+        AddressLine2,
+        City,
+        State,
+        PostalCode,
+        Country,
         result
     );
 

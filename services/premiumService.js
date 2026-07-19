@@ -66,11 +66,11 @@ exports.addPremium = (
             });
         }
 
-        if (policy.IsRenewed != 1) {
+        /*if (policy.IsRenewed != 1) {
             return result({
                 message: "Policy is not active. Cannot add premium."
             });
-        }
+        }*/
 
         premiumRepo.addPremium(
             PolicyId,

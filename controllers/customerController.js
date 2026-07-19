@@ -34,42 +34,6 @@ exports.getCustomerById = (req, res) => {
 
 };
 
-/*exports.addCustomer=(request,response)=>{
-    const {CustomerCode,FirstName,LastName,DateOfBirth,Gender,Email,
-        MobileNumber,AddressLine1,AddressLine2,City,State,PostalCode,
-        Country,PanNumber,AadhaarNumber,Occupation,AnnualIncome,
-        NomineeName,NomineeRelationship,NomineeContactNumber,
-        TotalPoliciesPurchased}=request.body ;
-
-        customerService.addCustomer(CustomerCode,FirstName,LastName,DateOfBirth,Gender,Email,
-        MobileNumber,AddressLine1,AddressLine2,City,State,PostalCode,
-        Country,PanNumber,AadhaarNumber,Occupation,AnnualIncome,
-        NomineeName,NomineeRelationship,NomineeContactNumber,
-        TotalPoliciesPurchased, (err,result)=>{
-            
-            if(err){
-                return response.status(500).json(err);
-            }
-
-            // emit an event after successful purchase
-            emitter.emit('addCustumer', {
-                CustomerCode,
-                FirstName,
-                LastName
-                });
-
-            response.json({
-                message : "Customer registered entry created successfully",
-                data: result
-            });
-            console.log("data inserted successfully")
-    });
-};
-
-emitter.on("addCustumer",handlers.Emailsend);
-emitter.on("addCustumer",handlers.SMSsend);
-*/
-
 
 
 
@@ -85,48 +49,78 @@ exports.addCustomer = (req, res) => {
         req.body.Gender,
         req.body.Email,
         req.body.MobileNumber,
-        req.body.Address,
+        req.body.AddressLine1,
+        req.body.AddressLine2,
+        req.body.City,
+        req.body.State,
+        req.body.PostalCode,
+        req.body.Country,
+        req.body.PanNumber,
+        req.body.AadhaarNumber,
+        req.body.Occupation,
+        req.body.AnnualIncome,
+        req.body.NomineeName,
+        req.body.NomineeRelationship,
+        req.body.NomineeContactNumber
+    ,
+    (err, data) => {
 
-        (err, data) => {
+        if (err)
+            return res.status(500).send(err);
 
-            if (err)
-                return res.status(500).send(err);
+        res.json({
+            message: "Customer Added Successfully",
+            CustomerId: data.insertId
+        });
+ });
+            
+};
 
-            res.json({
-                message: "Customer Added Successfully"
-            });
-
-                if (data) {
-                                emitter.emit("customerAdded", {
-                                    policyId: req.body.PolicyId,
-                                    data
-                                });
-                                console.log('Customer Added Event Emitted');
-                            }
-                
-                
-                        });
-                
-                };
-                
+           /* if (data) {
+                            emitter.emit("customerAdded", {
+                                policyId: req.body.PolicyId,
+                                data
+                            });
+                            console.log('Customer Added Event Emitted');
+                        }
+            
+            
+                    };
+            
+            };
+            
 emitter.on("customerAdded", handlers.Emailsend);
 emitter.on("customerAdded", handlers.SMSsend);
 //emitter.on("customerAdded", handlers.CustomerAddedDocument);
+*/
+
+
+
 
 
 
 // Update Customer
 exports.updateCustomer = (req, res) => {
 
+    
+    console.log(req.headers);
+    console.log(req.body);
+
     customerService.updateCustomer(
+        
 
-        req.params.id,
-
-        req.body.FirstName,
+       req.params.id,
+         req.body.FirstName,
         req.body.LastName,
         req.body.Email,
         req.body.MobileNumber,
-        req.body.Address,
+        req.body.AddressLine1,
+        req.body.AddressLine2,
+        req.body.City,
+        req.body.State,
+        req.body.PostalCode,
+        req.body.Country,
+        
 
         (err, data) => {
 

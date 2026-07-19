@@ -16,6 +16,14 @@ exports.getPolicyById = (id, result) => {
     );
 };
 
+exports.getPolicyByCustomerId = (id, result) => {
+    connection.query(
+        "SELECT * FROM policies WHERE CustomerId=?",
+        [id],
+        result
+    );
+};
+
 exports.getPolicyByNumber = (PolicyNumber, result) => {
 
     const sql = `
@@ -31,6 +39,25 @@ exports.getPolicyByNumber = (PolicyNumber, result) => {
     );
 
 };
+//above function getPolicyByNumber is used to get policy by policy number
+
+exports.renewPolicy = (PolicyNumber, result) => {
+
+    const sql = `
+        UPDATE policies
+        SET IsRenewed = 1
+        WHERE PolicyNumber = ?
+    `;
+
+    connection.query(
+        sql,
+        [PolicyNumber],
+        result
+    );
+
+};
+
+//above function getPolicyByNumber is used to get policy by policy number
 
 // Add Policy
 exports.addPolicy = (
@@ -103,3 +130,7 @@ exports.deletePolicy = (id, result) => {
                         );
 
                     };
+
+
+
+

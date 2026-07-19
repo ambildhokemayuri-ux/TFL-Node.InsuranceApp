@@ -25,24 +25,48 @@ exports.addCustomer = (
     Gender,
     Email,
     MobileNumber,
-    Address,
+    AddressLine1,
+    AddressLine2,
+    City,
+    State,
+    PostalCode,
+    Country,
+    PanNumber,
+    AadhaarNumber,
+    Occupation,
+    AnnualIncome,
+    NomineeName,
+    NomineeRelationship,
+    NomineeContactNumber,
     result
 ) => {
 
     const sql = `
-        INSERT INTO customers
-        (
-            CustomerCode,
-            FirstName,
-            LastName,
-            DateOfBirth,
-            Gender,
-            Email,
-            MobileNumber,
-            Address
-        )
-        VALUES (?,?,?,?,?,?,?,?)
-    `;
+                        INSERT INTO customers
+                        (
+                            CustomerCode,
+                            FirstName,
+                            LastName,
+                            DateOfBirth,
+                            Gender,
+                            Email,
+                            MobileNumber,
+                            AddressLine1,
+                            AddressLine2,
+                            City,
+                            State,
+                            PostalCode,
+                            Country,
+                            PanNumber,
+                            AadhaarNumber,
+                            Occupation,
+                            AnnualIncome,
+                            NomineeName,
+                            NomineeRelationship,
+                            NomineeContactNumber
+                        )
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                        `;
 
     connection.query(
         sql,
@@ -54,7 +78,19 @@ exports.addCustomer = (
             Gender,
             Email,
             MobileNumber,
-            Address
+            AddressLine1,
+            AddressLine2,
+            City,
+            State,
+            PostalCode,
+            Country,
+            PanNumber,
+            AadhaarNumber,
+            Occupation,
+            AnnualIncome,
+            NomineeName,
+            NomineeRelationship,
+            NomineeContactNumber
         ],
         result
     );
@@ -62,13 +98,18 @@ exports.addCustomer = (
 
 // Update Customer
 exports.updateCustomer = (
-    id,
-    FirstName,
-    LastName,
-    Email,
-    MobileNumber,
-    Address,
-    result
+                        id,
+                        FirstName,
+                        LastName,
+                        Email,
+                        MobileNumber,
+                        AddressLine1,
+                        AddressLine2,
+                        City,
+                        State,
+                        PostalCode,
+                        Country,
+                        result
 ) => {
 
     const sql = `
@@ -78,7 +119,12 @@ exports.updateCustomer = (
             LastName=?,
             Email=?,
             MobileNumber=?,
-            Address=?
+            AddressLine1=?,
+            AddressLine2=?,
+            City=?,
+            State=?,
+            PostalCode=?,
+            Country=?
         WHERE CustomerId=?
     `;
 
@@ -89,11 +135,17 @@ exports.updateCustomer = (
             LastName,
             Email,
             MobileNumber,
-            Address,
+            AddressLine1,
+            AddressLine2,
+            City,
+            State,
+            PostalCode,
+            Country,
             id
         ],
         result
     );
+       
 };
 
 // Delete Customer
@@ -109,22 +161,3 @@ exports.deleteCustomer = (id, result) => {
 
 
 
-/*var connection = require("../config/db");
-
-
-
-exports.addCustomer=(CustomerCode,FirstName,LastName,DateOfBirth,Gender,Email,
-        MobileNumber,AddressLine1,AddressLine2,City,State,PostalCode,
-        Country,PanNumber,AadhaarNumber,Occupation,AnnualIncome,
-        NomineeName,NomineeRelationship,NomineeContactNumber,
-        TotalPoliciesPurchased,result)=>{
-    
-        var sql = "insert into customers (CustomerCode,FirstName,LastName,DateOfBirth,Gender,Email,MobileNumber,AddressLine1,AddressLine2,City,State,PostalCode,Country,PanNumber,AadhaarNumber,Occupation,AnnualIncome,NomineeName,NomineeRelationship,NomineeContactNumber,TotalPoliciesPurchased) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-        connection.query(sql, [CustomerCode,FirstName,LastName,DateOfBirth,Gender,Email,
-        MobileNumber,AddressLine1,AddressLine2,City,State,PostalCode,
-        Country,PanNumber,AadhaarNumber,Occupation,AnnualIncome,
-        NomineeName,NomineeRelationship,NomineeContactNumber,
-        TotalPoliciesPurchased],result);
-};
-*/

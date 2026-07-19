@@ -1,4 +1,6 @@
 const claimService = require("../services/claimService");
+const handlers = require("./handler");
+const emitter = require("../emitter");
 
 // Get All
 exports.getAllClaims = (req, res) => {
@@ -24,9 +26,21 @@ exports.getClaimById = (req, res) => {
 
         res.json(data);
 
-    });
-
-};
+      if (data) {
+                   emitter.emit("claimFetchedById", {
+                       PolicyNumber: req.params.id,
+                       data
+                   });
+               }
+   
+   
+           });
+   
+   };
+   
+   emitter.on("claimFetchedById", handlers.Emailsend);
+   emitter.on("claimFetchedById", handlers.SMSsend);
+   
 
 // Add
 exports.addClaim = (req, res) => {
@@ -53,9 +67,20 @@ exports.addClaim = (req, res) => {
                 message: "Claim Added Successfully"
             });
 
-        });
-
-};
+        if (data) {
+                   emitter.emit("claimFetchedById", {
+                       PolicyNumber: req.params.id,
+                       data
+                   });
+               }
+   
+   
+           });
+   
+   };
+   
+   emitter.on("claimFetchedById", handlers.Emailsend);
+   emitter.on("claimFetchedById", handlers.SMSsend);
 
 // Update
 exports.updateClaim = (req, res) => {
