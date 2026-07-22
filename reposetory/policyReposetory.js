@@ -134,3 +134,18 @@ exports.deletePolicy = (id, result) => {
 
 
 
+exports.getPolicyCount = (result) => {
+
+    const sql = "SELECT COUNT(*) AS count FROM policies";
+
+    connection.query(sql, (err, rows) => {
+         console.log(rows);
+         
+        if (err) {
+            return result(err, null);
+        }
+
+        result(null, rows[0]);
+    });
+
+};

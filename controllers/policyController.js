@@ -208,3 +208,19 @@ exports.renewPolicy = (req, res) => {
     );
 
 };
+
+
+exports.getPolicyCount = (req, res) => {
+
+    policyService.getPolicyCount((err, data) => {
+
+         console.log(data);
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        res.json(data);
+
+    });
+
+};

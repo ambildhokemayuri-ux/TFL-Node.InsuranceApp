@@ -159,5 +159,19 @@ exports.deleteCustomer = (id, result) => {
 
 };
 
+exports.getCustomerCount = (result) => {
 
+    const sql = "SELECT COUNT(*) AS count FROM Customers";
+
+    connection.query(sql, (err, rows) => {
+         console.log(rows);
+         
+        if (err) {
+            return result(err, null);
+        }
+
+        result(null, rows[0]);
+    });
+
+};
 

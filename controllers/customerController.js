@@ -180,3 +180,19 @@ exports.deleteCustomer = (req, res) => {
                     
         emitter.on("customerUpdated", handlers.Emailsend);
         emitter.on("customerUpdated", handlers.SMSsend);
+
+
+ exports.getCustomerCount = (req, res) => {
+
+    customerService.getCustomerCount((err, data) => {
+
+         console.log(data);
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        res.json(data);
+
+    });
+
+};

@@ -81,3 +81,11 @@ exports.renewPolicy = (PolicyNumber, result) => {
     });
 
 };
+
+
+
+exports.getPolicyCount = (result) => {
+
+    policyRepo.getPolicyCount(result);
+
+};

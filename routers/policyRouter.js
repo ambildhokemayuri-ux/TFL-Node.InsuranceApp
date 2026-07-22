@@ -6,6 +6,8 @@ const controller = require("../controllers/policyController");
 
 router.get('/getAllPolicies',controller.getAllPolicies);
 
+router.get("/count", controller.getPolicyCount);
+
 router.get("/:id", controller.getPolicyById);
 
 router.get("/getPolicyByCustomerId/:id",controller.getPolicyByCustomerId);
